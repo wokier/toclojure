@@ -10,10 +10,9 @@ pom.xml
 .lein-plugins
 .lein-env
 .idea
-
 .lein-repl-history
 mywebapp.iml
 resources/.DS_Store
 todomvc-angularjs/
-resources/public/js/
 node_modules/
+resources/public/js/lib/
