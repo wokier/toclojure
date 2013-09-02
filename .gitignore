@@ -11,3 +11,7 @@ pom.xml
 .lein-env
 .idea
 
+.lein-repl-history
+mywebapp.iml
+resources/.DS_Store
+todomvc-angularjs/
