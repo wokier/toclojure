@@ -1,1 +1,1 @@
-web: npm install && lein ring server-headless
+web: npm install -g bower && bower install && lein ring server-headless

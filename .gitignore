@@ -16,3 +16,4 @@ resources/.DS_Store
 todomvc-angularjs/
 node_modules/
 resources/public/js/lib/
+.DS_Store
