@@ -1,1 +1,1 @@
-web: lein ring server-headless
+web: npm install && lein ring server-headless

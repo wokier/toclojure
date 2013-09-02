@@ -16,3 +16,4 @@ mywebapp.iml
 resources/.DS_Store
 todomvc-angularjs/
 resources/public/js/
+node_modules/
