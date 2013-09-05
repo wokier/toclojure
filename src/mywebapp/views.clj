@@ -71,7 +71,7 @@
       [:footer#footer {:ng-show "todos.length" :ng-cloak ""}
        [:span#todo-count
         [:strong "{{remainingCount}}"]
-        [:ng-pluralize {:count "remainingCount" :when "{ one: 'item left', other: 'items left' }"}]
+        [:ng-pluralize {:count "remainingCount" :when "{ one: ' item left', other: ' items left' }"}]
         ]
        [:ul#filters
         [:li
