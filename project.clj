@@ -11,7 +11,7 @@
                  [cheshire "5.1.1"]]
   :plugins [[lein-ring "0.7.3"]
             [lein-pprint "1.1.1"]
-            [org.clojars.wokier/lein-bower "0.1.0"]]
+            [org.clojars.wokier/lein-bower "0.3.0"]]
   :ring {:handler mywebapp.routes/app}
   :profiles
   {:dev {:dependencies [[ring-mock "0.1.3"]
