@@ -21,4 +21,5 @@
                              ns "$"
                              "\033[0m "))}
   :prep-tasks ["javac" "compile" "bower"]
+  :min-lein-version "2.0.0"
   )
