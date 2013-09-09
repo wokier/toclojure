@@ -1,1 +1,1 @@
-web: lein ring server-headless
+web: lein --version && lein ring server-headless
