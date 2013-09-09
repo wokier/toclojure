@@ -1,1 +1,1 @@
-web: lein bower && lein ring server-headless
+web: lein ring server-headless
