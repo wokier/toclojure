@@ -1,9 +1,7 @@
 (ns mybusiness.service
   (:require [monger.core :as mg]
             [monger.collection :as mgc]
-            [clojure.data.json :as json]
-            [monger.json :as mgj]
-            [cheshire.core :refer :all :as cs])
+            [clojure.data.json :as json])
   (:import [com.mongodb MongoOptions ServerAddress])
   (:use clojure.test
         monger.conversion))
