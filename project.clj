@@ -7,10 +7,11 @@
                  [org.clojure/tools.trace "0.7.5"]
                  [com.novemberain/monger "1.4.2"]
                  [org.clojure/clojure-contrib "1.2.0"]
-                 [org.clojure/data.json "0.2.3"]]
+                 [org.clojure/data.json "0.2.3"]
+                 [cheshire "5.1.1"]]
   :plugins [[lein-ring "0.7.3"]
             [lein-pprint "1.1.1"]
-            [org.clojars.wokier/lein-bower "0.4.0"]]
+            [org.clojars.wokier/lein-bower "0.5.0"]]
   :ring {:handler mywebapp.routes/app}
   :profiles
   {:dev {:dependencies [[ring-mock "0.1.3"]

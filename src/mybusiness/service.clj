@@ -1,8 +1,11 @@
 (ns mybusiness.service
   (:require [monger.core :as mg]
             [monger.collection :as mgc]
-            [clojure.data.json :as json])
-  (:import [com.mongodb MongoOptions ServerAddress])
+            [clojure.data.json :as json]
+            [monger.json]
+            [cheshire.core :refer :all :as cs])
+  (:import [com.mongodb MongoOptions ServerAddress]
+           [java.util.regex Matcher])
   (:use clojure.test
         monger.conversion))
 
@@ -22,6 +25,7 @@
   (mg/set-db! (monger.core/get-db "todb"))
   (mgc/insert-batch "todos" (json/read-str todos :key-fn #(clojure.string/replace % #"\$\$hashKey" "hashKey")))
   (mg/disconnect!)
+  (println todos)
   )
 
 (defn findTodos [uri]
@@ -31,5 +35,6 @@
   (mg/set-db! (monger.core/get-db "todb"))
   (def todos (into #{} (mgc/find-maps "todos")))
   (mg/disconnect!)
-  todos
+  (println todos)
+  (cs/generate-string todos {:key-fn #(clojure.string/replace % #"hashKey"  (Matcher/quoteReplacement "$$hashKey"))})
   )
