@@ -7,16 +7,18 @@
         ))
 
 (deftest service-test
-  (testing "insert todos"
+  (testing "save todos"
     (clearAllTodos nil)
-    (insertTodos "[{\"title\":\"things\",\"completed\":true,\"$$hashKey\":\"004\"},{\"title\":\"That\",\"completed\":false,\"$$hashKey\":\"007\"},{\"title\":\"others things\",\"completed\":false,\"$$hashKey\":\"00B\"}]")
-    (is (= 3 (count (cs/parse-string (findTodos nil) {:key-fn #(clojure.string/replace % #"\$\$hashKey" "hashKey")} ))))
+    (is (= 0 (count (json/read-str (findTodos nil) :key-fn #(clojure.string/replace % #"\$\$hashKey" "hashKey") ))))
+    (saveTodos "[{\"title\":\"things\",\"completed\":true,\"$$hashKey\":\"004\"},{\"title\":\"That\",\"completed\":false,\"$$hashKey\":\"007\"},{\"title\":\"others things\",\"completed\":false,\"$$hashKey\":\"00B\"}]")
+    (is (= 3 (count (json/read-str (findTodos nil) :key-fn #(clojure.string/replace % #"\$\$hashKey" "hashKey") ))))
     )
 
-  (testing "re-insert same todos"
+  (testing "re-save same todos"
     (clearAllTodos nil)
-    (insertTodos "[{\"title\":\"things\",\"completed\":true,\"$$hashKey\":\"004\"},{\"title\":\"That\",\"completed\":false,\"$$hashKey\":\"007\"},{\"title\":\"others things\",\"completed\":false,\"$$hashKey\":\"00B\"}]")
-    (insertTodos (findTodos nil) )
+    (saveTodos "[{\"title\":\"things\",\"completed\":true,\"$$hashKey\":\"004\"},{\"title\":\"That\",\"completed\":false,\"$$hashKey\":\"007\"},{\"title\":\"others things\",\"completed\":false,\"$$hashKey\":\"00B\"}]")
+    (saveTodos (findTodos nil) )
+    (is (= 3 (count (json/read-str (findTodos nil) :key-fn #(clojure.string/replace % #"\$\$hashKey" "hashKey") ))))
     )
   )
 

@@ -1,6 +1,7 @@
 (ns mywebapp.routes
   (:use compojure.core
-        mywebapp.views)
+        mywebapp.views
+        mywebapp.api)
   (:require [compojure.handler :as handler]
             [compojure.route :as route]))
 
@@ -9,6 +10,9 @@
   (GET "/" [] (index-page))
   (GET "/todemo" [] (demo-page))
   (GET "/about" [] (about-page))
+  (GET "/api/test" [] (test))
+  (GET "/api" [] (getTodos))
+  (PUT "/api" [] (updateTodos))
   (route/resources "/")
   (route/not-found "No page"))
 
