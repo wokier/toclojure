@@ -24,10 +24,11 @@
     (mg/connect!)
     (mg/connect-via-uri! uri))
   (mg/set-db! (monger.core/get-db "todb"))
-  (println (str "saveTodos---" todos))
+;   (println (str "saveTodos---" todos))
   (def todosMap (cs/parse-string (clojure.string/replace todos #"\$\$hashKey" "hashKey") true))
   (println (str "saveTodosMap" (into [] todosMap)))
-  (println (str "saveTodosIds" (into [] (map #(mgc/save-and-return "todos" %) todosMap))))
+  (def newObjectId #(ObjectId. %))
+  (println (str "saveTodosIds" (into [] (map #(mgc/save-and-return "todos" (if (contains? % :_id ) (update-in % [:_id ] newObjectId) %)) todosMap))))
   (mg/disconnect!)
   )
 
@@ -39,9 +40,10 @@
   (def todosMap (into [] (mgc/find-maps "todos")))
   (mg/disconnect!)
   (println (str "--findTodosMap" todosMap))
-  (def todos (cs/generate-string todosMap {:key-fn (comp #(clojure.string/replace % #"hashKey" (Matcher/quoteReplacement "$$hashKey")) str #(clojure.string/replace % #":" ""))}))
-  (println (str "--findTodos---" todos))
-  (def todosok (cs/generate-string (distinct (cs/parse-string todos))))
-  (println (str "--findTodosok-" todosok))
-  todosok
+  (def clearKey (comp #(clojure.string/replace % #"hashKey" (Matcher/quoteReplacement "$$hashKey")) str #(clojure.string/replace % #":" "")))
+  (def clearVal (comp str))
+  (def todos (cs/generate-string (map #(zipmap (map clearKey (keys %)) (map clearVal (vals %))) todosMap)))
+; (println (str "--findTodos---" todos))
+  todos
   )
+
