@@ -32,9 +32,8 @@
 
 (defn findTodos [uri]
   (if (nil? uri)
-    (mg/connect!)
+    (comp (mg/connect!) (mg/set-db! (monger.core/get-db "todb")))
     (mg/connect-via-uri! uri))
-  (mg/set-db! (monger.core/get-db "todb"))
   (def todosMap (into [] (mgc/find-maps "todos")))
   (mg/disconnect!)
   (println (str "--findTodosMap" todosMap))
