@@ -3,6 +3,7 @@
   "version": "0.1.0-SNAPSHOT",
   "dependencies": {
     "angular": "~1.0.7",
+    "angular-resource": "~1.0.7",
     "todomvc-common": "~0.1.4"
   },
   "devDependencies": {

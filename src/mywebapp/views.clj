@@ -89,10 +89,12 @@
       ]
      ]
     (include-js "js/lib/todomvc-common/base.js")
-    (include-js "js/lib/angular/angular.js")
+    (include-js "js/lib/angular/angular.min.js")
+    (include-js "js/lib/angular-resource/angular-resource.min.js")
     (include-js "js/app.js")
     (include-js "js/controllers/todoCtrl.js")
     (include-js "js/services/todoStorage.js")
+    (include-js "js/services/todoResource.js")
     (include-js "js/directives/todoFocus.js")
     (include-js "js/directives/todoBlur.js")
     (include-js "js/directives/todoEscape.js")
