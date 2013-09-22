@@ -8,17 +8,17 @@
 
 (deftest service-test
   (testing "save todos"
-    (clearAllTodos nil)
-    (is (= 0 (count (json/read-str (findTodos nil) :key-fn #(clojure.string/replace % #"\$\$hashKey" "hashKey") ))))
-    (saveTodos "[{\"title\":\"things\",\"completed\":true,\"$$hashKey\":\"004\"},{\"title\":\"That\",\"completed\":false,\"$$hashKey\":\"007\"},{\"title\":\"others things\",\"completed\":false,\"$$hashKey\":\"00B\"}]" nil)
-    (is (= 3 (count (json/read-str (findTodos nil) :key-fn #(clojure.string/replace % #"\$\$hashKey" "hashKey") ))))
+    (clearAllTodos (System/getenv "MONGOHQ_URL"))
+    (is (= 0 (count (json/read-str (findTodos (System/getenv "MONGOHQ_URL")) :key-fn #(clojure.string/replace % #"\$\$hashKey" "hashKey") ))))
+    (saveTodos "[{\"title\":\"things\",\"completed\":true,\"$$hashKey\":\"004\"},{\"title\":\"That\",\"completed\":false,\"$$hashKey\":\"007\"},{\"title\":\"others things\",\"completed\":false,\"$$hashKey\":\"00B\"}]" (System/getenv "MONGOHQ_URL"))
+    (is (= 3 (count (json/read-str (findTodos (System/getenv "MONGOHQ_URL")) :key-fn #(clojure.string/replace % #"\$\$hashKey" "hashKey") ))))
     )
 
   (testing "re-save same todos"
     (clearAllTodos nil)
-    (saveTodos "[{\"title\":\"things\",\"completed\":true,\"$$hashKey\":\"004\"},{\"title\":\"That\",\"completed\":false,\"$$hashKey\":\"007\"},{\"title\":\"others things\",\"completed\":false,\"$$hashKey\":\"00B\"}]" nil)
-    (saveTodos (findTodos nil) nil)
-    (is (= 3 (count (json/read-str (findTodos nil) :key-fn #(clojure.string/replace % #"\$\$hashKey" "hashKey") ))))
+    (saveTodos "[{\"title\":\"things\",\"completed\":true,\"$$hashKey\":\"004\"},{\"title\":\"That\",\"completed\":false,\"$$hashKey\":\"007\"},{\"title\":\"others things\",\"completed\":false,\"$$hashKey\":\"00B\"}]" (System/getenv "MONGOHQ_URL"))
+    (saveTodos (findTodos (System/getenv "MONGOHQ_URL")) (System/getenv "MONGOHQ_URL"))
+    (is (= 3 (count (json/read-str (findTodos (System/getenv "MONGOHQ_URL")) :key-fn #(clojure.string/replace % #"\$\$hashKey" "hashKey") ))))
     )
   )
 
