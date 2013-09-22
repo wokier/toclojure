@@ -2,7 +2,7 @@
   (:use [hiccup core page]
         [mybusiness.service]))
 
-(defn test []
+(defn api-test []
   "OK"
   )
 

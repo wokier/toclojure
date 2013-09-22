@@ -10,7 +10,7 @@
   (GET "/" [] (index-page))
   (GET "/todemo" [] (demo-page))
   (GET "/about" [] (about-page))
-  (GET "/api/test" [] (test))
+  (GET "/api/test" [] (api-test))
   (GET "/api/hello/:who" [who] (hello who))
   (POST "/api/miror" {body :body} (slurp body))
   (GET "/api/todos" [] (getTodos))
