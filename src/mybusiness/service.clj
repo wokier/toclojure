@@ -12,19 +12,17 @@
 
 (defn clearAllTodos [uri]
   (if (nil? uri)
-    (mg/connect!)
+    (comp (mg/connect!) (mg/set-db! (monger.core/get-db "todb")))
     (mg/connect-via-uri! uri))
-  (mg/set-db! (monger.core/get-db "todb"))
   (mgc/remove "todos")
   (mg/disconnect!)
   )
 
 (defn saveTodos [todos uri]
   (if (nil? uri)
-    (mg/connect!)
+    (comp (mg/connect!) (mg/set-db! (monger.core/get-db "todb")))
     (mg/connect-via-uri! uri))
-  (mg/set-db! (monger.core/get-db "todb"))
-;   (println (str "saveTodos---" todos))
+  ;   (println (str "saveTodos---" todos))
   (def todosMap (cs/parse-string (clojure.string/replace todos #"\$\$hashKey" "hashKey") true))
   (println (str "saveTodosMap" (into [] todosMap)))
   (def newObjectId #(ObjectId. %))
@@ -43,7 +41,7 @@
   (def clearKey (comp #(clojure.string/replace % #"hashKey" (Matcher/quoteReplacement "$$hashKey")) str #(clojure.string/replace % #":" "")))
   (def clearVal (comp str))
   (def todos (cs/generate-string (map #(zipmap (map clearKey (keys %)) (map clearVal (vals %))) todosMap)))
-; (println (str "--findTodos---" todos))
+  ; (println (str "--findTodos---" todos))
   todos
   )
 
