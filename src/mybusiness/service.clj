@@ -19,7 +19,7 @@
   (mg/disconnect!)
   )
 
-(defn saveTodos [todos & uri]
+(defn saveTodos [todos uri]
   (if (nil? uri)
     (mg/connect!)
     (mg/connect-via-uri! uri))

@@ -6,8 +6,15 @@
   "OK"
   )
 
-(defn getTodos []
-  (findTodos (System/getenv "MONGOHQ_URL")))
+(defn hello [who]
+  (str "Hello " who)
+  )
 
-(defn updateTodos []
-  (saveTodos (System/getenv "MONGOHQ_URL")))
+(defn getTodos []
+  (findTodos (System/getenv "MONGOHQ_URL"))
+  )
+
+(defn updateTodos [todos]
+  (saveTodos todos (System/getenv "MONGOHQ_URL"))
+  (findTodos (System/getenv "MONGOHQ_URL"))
+  )
