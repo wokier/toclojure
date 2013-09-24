@@ -38,7 +38,7 @@
   (mg/disconnect!)
   (println (str "--findTodosMap" todosMap))
   (def clearKey (comp #(clojure.string/replace % #"hashKey" (Matcher/quoteReplacement "$$hashKey")) str #(clojure.string/replace % #":" "")))
-  (def clearVal (comp str))
+  (def clearVal (comp #(if (or (true? %) (false? %)) % (str %) )) )
   (def todos (cs/generate-string (map #(zipmap (map clearKey (keys %)) (map clearVal (vals %))) todosMap)))
   ; (println (str "--findTodos---" todos))
   todos
