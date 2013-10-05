@@ -1,6 +1,6 @@
 (ns mywebapp.api
   (:use [hiccup core page]
-        [mybusiness.service]))
+        [mybusiness.service :as service]))
 
 (defn api-test []
   "OK"
@@ -11,10 +11,14 @@
   )
 
 (defn getTodos []
-  (findTodos (System/getenv "MONGOHQ_URL"))
+  (service/findTodos (System/getenv "MONGOHQ_URL"))
   )
 
 (defn updateTodos [todos]
-  (saveTodos todos (System/getenv "MONGOHQ_URL"))
-  (findTodos (System/getenv "MONGOHQ_URL"))
+  (service/saveTodos todos (System/getenv "MONGOHQ_URL"))
+  (service/findTodos (System/getenv "MONGOHQ_URL"))
+  )
+
+(defn deleteTodoById [id]
+  (service/deleteTodo id (System/getenv "MONGOHQ_URL"))
   )

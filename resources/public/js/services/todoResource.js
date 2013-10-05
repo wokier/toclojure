@@ -1,14 +1,18 @@
 "use strict";
 
 todomvc.factory('todoResource', function ($resource) {
-	return $resource('api/todos', {}, {
+	return $resource('api/todos/:todoId',  {todoId:'@id'}, {
 		getTodos : {
 			method: 'GET',
 			isArray: true
 		}  ,
 		updateTodos : {
-			method: 'POST',
+			method: 'PUT',
 			isArray: true
+		}  ,
+		deleteTodo : {
+		    method: 'DELETE',
+		    isArray: true
 		}
 	});
 });

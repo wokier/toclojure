@@ -44,3 +44,11 @@
   todos
   )
 
+(defn deleteTodo [id uri]
+  (if (nil? uri)
+    (comp (mg/connect!) (mg/set-db! (monger.core/get-db "todb")))
+    (mg/connect-via-uri! uri))
+  (println (str "deleteTodo " id))
+  (mgc/remove-by-id "todos" (ObjectId. id))
+  (mg/disconnect!)
+  )

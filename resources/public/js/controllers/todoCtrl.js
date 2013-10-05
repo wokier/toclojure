@@ -71,11 +71,15 @@ todomvc.controller('TodoCtrl', function TodoCtrl($scope, $location, todoResource
 	};
 
 	$scope.removeTodo = function (todo) {
-		$scope.todos.splice(todos.indexOf(todo), 1);
+	    todoResource.deleteTodo({todoId:todo._id});
+		$scope.todos.splice($scope.todos.indexOf(todo), 1);
 	};
 
 	$scope.clearCompletedTodos = function () {
-		$scope.todos = todos.filter(function (val) {
+		$scope.todos = $scope.todos.filter(function (val) {
+		    if(val.completed){
+		        todoResource.deleteTodo({todoId:val._id});
+		    }
 			return !val.completed;
 		});
 	};
