@@ -6,6 +6,8 @@
                                                                    [:div.nav-collapse.collapse [:ul.nav [:li.active [:a {:href "/"} "To Clojure"]]
                                                                                                 [:li.active [:a {:href "/todemo"} "To Demo"]]
                                                                                                 [:li.active [:a {:href "/about"} "About"]]]]]]])
+(defn footer []
+  [:div#sources [:div [:a {:href "https://github.com/wokier/toclojure"} "Sources"]]])
 
 (defn template [& body]
   (html5
@@ -19,9 +21,6 @@
             [:div.container body]]
      (footer)]
     ))
-
-(defn footer []
-  [:div#sources [:div [:a {:href "https://github.com/wokier/toclojure"} "Sources"]]])
 
 (defn index-page []
   (template
