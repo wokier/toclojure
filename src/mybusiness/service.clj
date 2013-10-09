@@ -11,6 +11,8 @@
   (:use clojure.test ;; YAGNI
         monger.conversion))
 
+;; preferable to use :require (as no definition copy takes place so no collision than :use)
+
 (def db-connection-name "todb")
 
 (defn connect-to-db! "Connect to the db (create connection if needed)." [uri db-name]
