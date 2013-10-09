@@ -1,4 +1,5 @@
 (ns mybusiness.service
+  "a docstring would be nice here to know what this namespace represents."
   (:require [monger.core :as mg]
             [monger.collection :as mgc]
             [clojure.data.json :as json]
