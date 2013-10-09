@@ -8,7 +8,7 @@
   (:import [com.mongodb MongoOptions ServerAddress]
            [java.util.regex Matcher]
            [org.bson.types ObjectId])
-  (:use clojure.test
+  (:use clojure.test ;; YAGNI
         monger.conversion))
 
 (def db-connection-name "todb")
